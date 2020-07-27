@@ -1,31 +1,50 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@model IList<API_Practice.Models.BookInfo>
+@{
+    ViewBag.Title = "Index";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<h2>書籍資料</h2>
+<form action="@Url.Action("Index")" method="post">
+    <div class="form-inline">
+        編號 <input type="text" name="No" class="form-control" />
+        書名 <input type="text" name="BookName" class="form-control" />
+        類型< <select name="Type" class="input-large form-control">
+            <option value="A">雜誌</option>
+            <option value="B" selected=true>小說</option>
+            <option value="C">圖畫書</option>
+        </select>>
+        作者 <input type="text" name="Writer" class="form-control" />
+        <p></p>
+    </div>
+    <div class="form-inline">
+        <input type="submit" value="查詢" class="btn btn-success" />
+    </div>
+</form>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+<hr>
+<table class="table">
+    <tr>
+        <td>編號</td>
+        <td>書名</td>
+        <td>類型</td>
+        <td>作者</td>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr></tr>
+        <tr>
+            <td>@item.No</td>
+            <td>@item.BookName</td>
+            <td>@item.Type</td>
+            <td>@item.Writer</td>
+            <td>
+                <a href="@Url.Action("Edit")?No=@item.No" class="btn btn-info">修改</a>
+                <a href="@Url.Action("Delete")?No=@item.No"
+                   onclick="return confirm('確定要刪除嗎?');" class="btn btn-danger">刪除</a>
+            </td>
+        </tr>
+
+    }
+</table>
+<a href="@Url.Action("Create")">新增</a>

@@ -1,0 +1,23 @@
+﻿@model API_Practice.Models.BookInfo
+@{
+    ViewBag.Title = "Creat";
+}
+
+<form action="@Url.Action("Create")" method="post">
+
+    <p>
+        書名 <input type="text" name="BookName" class="form-control" />
+    </p>
+    <p>
+        類型 <<select name="Type" class="input-large form-control">
+            <option value="A">雜誌</option>
+            <option value="B" selected=true>小說</option>
+            <option value="C">圖畫書</option>
+        </select>>
+    </p>
+    <p>
+        作者 <input type="text" name="Writer" class="form-control" />
+    </p>
+    <input type="submit" value="新增" class="btn btn-success" />
+</form>
+
